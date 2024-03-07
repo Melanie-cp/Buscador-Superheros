@@ -4,6 +4,7 @@ $(document).ready(function () {
     const heroForm = $("#heroForm")
     const heroNumber = $("#heroNumber")
     const heroResult = $("#heroResult")
+    const chartContainer = $("#chartContainer")
 
     // Procesar el formulario
     heroForm.on("submit", function (event) {
@@ -45,6 +46,7 @@ $(document).ready(function () {
                 // console.log("Conexiones:", hero.connections['group-affiliation'])
                 // console.log("Altura:", hero.appearance.height[1])
                 // console.log("Peso:", hero.appearance.weight[1])
+                // console.log("power stats", hero.powerstats)
 
                 //construir un objeto
                 const myHero = {
@@ -83,6 +85,43 @@ $(document).ready(function () {
                     </div>
                 </div>
                 `)
+
+                //Pintar el gráfico con CanvaJS
+                const myHeroStats = {
+                    intelligence: +(hero.powerstats.intelligence),
+                    strength: +(hero.powerstats.strength),
+                    speed: +(hero.powerstats.speed),
+                    durability: +(hero.powerstats.durability),
+                    power: +(hero.powerstats.power),
+                    combat: +(hero.powerstats.combat)
+                }
+                console.log(myHeroStats)
+
+                const options = {
+                    title: {
+                        text: `Estadísticas de poder para ${myHero.name}`
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 45,
+                        showInLegend: "true",
+                        legendText: "{label}",
+                        indexLabel: "{label} ({y})",
+                        yValueFormatString: "#,##0.#" % "",
+                        dataPoints: [
+                            { label: "intelligence", y: `${myHeroStats.intelligence}` },
+                            { label: "strength", y: `${myHeroStats.strength}` },
+                            { label: "speed", y: `${myHeroStats.speed}` },
+                            { label: "durability", y: `${myHeroStats.durability}` },
+                            { label: "power", y: `${myHeroStats.power}` },
+                            { label: "combat", y: `${myHeroStats.combat}` }
+                        ]
+                    }]
+                }
+
+                chartContainer.CanvasJSChart(options);
+
+
             },
             error(e) {
                 console.log(e)
