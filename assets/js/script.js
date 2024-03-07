@@ -58,7 +58,31 @@ $(document).ready(function () {
                     height: hero.appearance.height[1],
                     weight: hero.appearance.weight[1]
                 }
-                console.log(myHero)
+
+                heroResult.html(`
+                <div class="card mb-3" style="max-width: 750px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="${myHero.image}"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Nombre: ${myHero.name}</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Aliases: ${myHero.aliases}</li>
+                                    <li class="list-group-item">Ocupación: ${myHero.occupation}</li>
+                                    <li class="list-group-item">Publicado por: ${myHero.publisher}</li>
+                                    <li class="list-group-item">Primera aparición: ${myHero.firstAppereance}</li>
+                                    <li class="list-group-item">Conexiones: ${myHero.connections}</li>
+                                    <li class="list-group-item">Altura: ${myHero.height}</li>
+                                    <li class="list-group-item">Peso: ${myHero.weight}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `)
             },
             error(e) {
                 console.log(e)
