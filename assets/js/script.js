@@ -18,9 +18,27 @@ $(document).ready(function () {
         //validaciones
         if (heroNumberInput > 0 && heroNumberInput <= 731) {
             heroNumber.addClass("is-valid")
+            getHero(heroNumberInput)
         } else {
             heroNumber.addClass("is-invalid")
         }
-
     })
+
+    // consumir la API
+    // url: https://www.superheroapi.com/api.php/4905856019427443/100
+    const getHero = (heroNumberFn) => {
+
+        $.ajax({
+            url: "https://www.superheroapi.com/api.php/4905856019427443/" + heroNumberFn,
+            method: "GET",
+            success(data) {
+                console.log(data)
+            },
+            error(e) {
+                console.log(e)
+            }
+        })
+    }
+
+
 })
